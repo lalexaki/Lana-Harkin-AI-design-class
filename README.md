@@ -2,7 +2,7 @@
 
 A static, three-page portfolio built from Lana's supplied project materials.
 
-- `index.html`: interactive waveform drawing and project links
+- `index.html`: interactive raccoon playground and project links
 - `album-cover.html`: AM cover study with Composition, Comparison and Typography sections, original prompts, references and a draggable first/final comparison
 - `clearspan.html`: gymnastics center, concept comparison and Blender video
 - `assets/`: optimized images, original process PDFs and supplied MP4
@@ -19,7 +19,7 @@ All site links and assets use relative paths, so they work under the repository 
 
 ## Interaction
 
-Click or tap the drawing area to add one shape at the pointer. Successive shapes vary in color, size, rotation and profile. Enter or Space adds a shape while the area is focused. Undo removes the newest shape; Clear canvas removes all shapes. The most recent 40 shapes are retained until page reload. On a touch screen, vertical scrolling remains available. Artwork may be cropped at the canvas edge by design.
+Click or tap the drawing area to add one cute raccoon at the pointer. Successive raccoons vary in pastel color, size, and rotation, cycling through heart-holders, sleepy royals, and waving bow-tied buddies. Enter or Space adds a raccoon while the area is focused. Undo removes the newest raccoon; Clear canvas removes all raccoons. The most recent 40 raccoons are retained until page reload. On a touch screen, vertical scrolling remains available. Artwork may be cropped at the canvas edge by design.
 
 ## Project material
 
