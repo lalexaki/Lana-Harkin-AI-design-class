@@ -4,7 +4,7 @@ A static, three-page portfolio built from Lana's supplied project materials.
 
 - `index.html`: interactive raccoon playground and project links
 - `album-cover.html`: AM cover study with Composition, Comparison and Typography sections, original prompts, references and a draggable first/final comparison
-- `clearspan.html`: gymnastics center, concept comparison and Blender video
+- `clearspan.html`: Futuristic Gymnastics Gym 2035: concept comparison, dimensioned floor plan, credited marble references, six model views and Blender video
 - `assets/`: optimized images, original process PDFs and supplied MP4
 
 No installation or build is required. For local preview, run `python3 -m http.server 8765` in this folder.
