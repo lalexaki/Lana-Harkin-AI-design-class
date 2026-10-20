@@ -3,7 +3,7 @@
 A static, three-page portfolio built from Lana's supplied project materials.
 
 - `index.html`: interactive waveform drawing and project links
-- `album-cover.html`: AM cover study, final artwork and selected process
+- `album-cover.html`: AM cover study with Composition, Comparison and Typography sections, original prompts, references and a draggable first/final comparison
 - `clearspan.html`: gymnastics center, concept comparison and Blender video
 - `assets/`: optimized images, original process PDFs and supplied MP4
 
