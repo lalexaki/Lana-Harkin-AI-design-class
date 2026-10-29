@@ -1,0 +1,78 @@
+/* Page-specific palettes. Cosmic Daydreamer uses its own, untouched stylesheet. */
+.portfolio-theme {
+  --paper: #101D3D;
+  --ink: #FFF4D3;
+  --muted: #6EA9DE;
+  --line: #466CB5;
+  --red: #F6D778;
+  --blue: #F6D778;
+  --black: #FFF4D3;
+  background: #101D3D;
+}
+.portfolio-theme .play-section { background: #101D3D; }
+.portfolio-theme .play-top {
+  background: #F6D778;
+  color: #101D3D;
+  border-color: #466CB5;
+}
+.portfolio-theme .play-top h2 { color: #101D3D; }
+.portfolio-theme #drawing {
+  color: #101D3D;
+  background-color: #6EA9DE;
+  background-image: radial-gradient(#466CB5 .7px, transparent .7px);
+}
+.portfolio-theme .album-thumb { background: #466CB5; }
+.portfolio-theme .gym-thumb { background: #6EA9DE; }
+.portfolio-theme .round-arrow { background: #F6D778; color: #101D3D; }
+.portfolio-theme .project-card:hover .round-arrow { background: #FFF4D3; }
+
+.album-theme {
+  --paper: #0D0D0F;
+  --ink: #F4EFE6;
+  --muted: #D5D0C7;
+  --line: #9C958B;
+  --red: #F6D778;
+  --blue: #F6D778;
+  --black: #F4EFE6;
+  background: #0D0D0F;
+}
+.album-theme .album-stage,
+.album-theme .type-art { background: #252528; }
+.album-theme .reference-image { background: #D5D0C7; }
+.album-theme .wave-reference { background: #F4EFE6; }
+.album-theme .result-image,
+.album-theme .third-result,
+.album-theme .type-detail,
+.album-theme .album-comparison,
+.album-theme .album-comparison img { background: #0D0D0F; }
+.album-theme details { background: #252528; }
+.album-theme .comparison .compare-label { background: #F4EFE6; color: #0D0D0F; }
+.album-theme .compare-line span { background: #F6D778; color: #0D0D0F; }
+.album-theme .pill-link { background: #F6D778; color: #0D0D0F; border-color: #F6D778; }
+.album-theme .pill-link:hover { background: #F4EFE6; border-color: #F4EFE6; }
+
+.gym-theme {
+  --paper: #263F5E;
+  --ink: #F7FAFC;
+  --muted: #A7D2ED;
+  --line: #A7D2ED;
+  --red: #D6B574;
+  --blue: #D6B574;
+  --black: #F7FAFC;
+  background: #263F5E;
+}
+.gym-theme .material-image { background: #A7D2ED; }
+.gym-theme .material-grid figure:nth-child(2) .material-image { background: #D6B574; }
+.gym-theme .material-grid figure:nth-child(3) .material-image { background: #A53348; }
+.gym-theme .floor-plan-figure img { background: #F7FAFC; }
+.gym-theme .dimension-table-wrap thead { background: #A53348; color: #F7FAFC; }
+.gym-theme .comparison .compare-label { background: #F7FAFC; color: #263F5E; }
+.gym-theme .compare-line { background: #D6B574; }
+.gym-theme .compare-line span { background: #D6B574; color: #263F5E; }
+.gym-theme .pill-link { background: #A53348; color: #F7FAFC; border-color: #D6B574; }
+.gym-theme .pill-link:hover { background: #D6B574; color: #263F5E; }
+
+:is(.portfolio-theme, .album-theme, .gym-theme) .site-header .mark,
+:is(.portfolio-theme, .album-theme, .gym-theme) footer .mark { color: var(--red); }
+:is(.portfolio-theme, .album-theme, .gym-theme) .skip { background: var(--ink); color: var(--paper); }
+:is(.portfolio-theme, .album-theme, .gym-theme) ::selection { background: var(--red); color: var(--paper); }
