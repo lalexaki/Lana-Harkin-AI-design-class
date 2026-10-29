@@ -21,25 +21,6 @@ const motion=document.getElementById('motion');
 let paused=reduced.matches;
 function setMotion(){document.body.classList.toggle('reduced-motion',paused);document.documentElement.style.scrollBehavior=paused?'auto':'';motion.textContent=paused?'Motion: reduced':'Motion: on';motion.setAttribute('aria-pressed',String(paused));}
 setMotion();motion.addEventListener('click',()=>{paused=!paused;setMotion();});
-const rows=document.getElementById('event-rows');
-for(let i=1;i<=5;i++){
- const row=document.createElement('tr');const th=document.createElement('th');th.scope='row';th.textContent=String(i).padStart(2,'0');row.append(th);
- for(const [key,prompt] of [['action','What did you do?'],['response','What changed?'],['learning','What did you understand?']]){
-  const td=document.createElement('td');const area=document.createElement('textarea');area.dataset.save=`event${i}-${key}`;area.setAttribute('aria-label',`Event ${i}: ${key}`);area.placeholder=prompt;td.append(area);row.append(td);
- }
- rows.append(row);
-}
-const fields=[...document.querySelectorAll('[data-save]')];const storageKey='cosmic-daydreamer-proposal-notes-v1';let saved={};
-try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');if(!saved||typeof saved!=='object')saved={};}catch(_){document.getElementById('save-status').textContent='Browser storage is unavailable. Export your notes before closing this page.';}
-fields.forEach(field=>{
- field.value=typeof saved[field.dataset.save]==='string'?saved[field.dataset.save]:'';
- field.addEventListener('input',()=>{saved[field.dataset.save]=field.value;try{localStorage.setItem(storageKey,JSON.stringify(saved));document.getElementById('save-status').textContent='Saved on this device. Export your notes to keep a separate copy.';}catch(_){document.getElementById('save-status').textContent='Could not save in this browser. Export your notes before closing.';}});
-});
-document.getElementById('export').addEventListener('click',()=>{
- const parts=['# Cosmic Daydreamer — Personal research notes','Exported '+new Date().toLocaleDateString(),'Only text entered by the student is included below.'];
- fields.forEach(f=>{if(f.value.trim())parts.push('## '+f.dataset.save+'\n'+f.value.trim());});
- const blob=new Blob([parts.join('\n\n')+'\n'],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='cosmic-daydreamer-my-notes.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-});
 let audioContext,master,muted=false;
 const sound=document.getElementById('sound'),mute=document.getElementById('mute'),audioStatus=document.getElementById('audio-status');
 mute.addEventListener('click',()=>{muted=!muted;mute.setAttribute('aria-pressed',String(muted));mute.textContent=muted?'Unmute':'Mute';sound.disabled=muted;if(master)master.gain.setValueAtTime(muted?0:0.1,audioContext.currentTime);audioStatus.textContent=muted?'Sound muted. Visual feedback is always available.':'Sound unmuted. Choose “Play fragment cue” to hear the sketch.';});
