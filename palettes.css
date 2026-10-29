@@ -76,3 +76,18 @@
 :is(.portfolio-theme, .album-theme, .gym-theme) footer .mark { color: var(--red); }
 :is(.portfolio-theme, .album-theme, .gym-theme) .skip { background: var(--ink); color: var(--paper); }
 :is(.portfolio-theme, .album-theme, .gym-theme) ::selection { background: var(--red); color: var(--paper); }
+
+/* An illustrated night sky for the homepage's tap-to-create canvas. */
+.portfolio-theme #drawing {
+  color: #FFF4D3;
+  background-color: #263F6B;
+  background-image: radial-gradient(ellipse at 75% 100%, #466CB5 0%, transparent 65%),
+    linear-gradient(120deg, #101D3D, #263F6B);
+  background-size: auto;
+}
+.portfolio-theme .drawing-note span { color: #C5E0F5; }
+.sky-motif { animation: sky-appear .65s ease-out both; }
+.sky-twinkles { animation: sky-appear .65s ease-out both, sky-shimmer 5s 1s ease-in-out infinite; }
+@keyframes sky-appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sky-shimmer { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
+@media (prefers-reduced-motion: reduce) { .sky-motif { animation: none; } }
