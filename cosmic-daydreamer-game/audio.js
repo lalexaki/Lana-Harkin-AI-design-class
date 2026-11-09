@@ -1,0 +1,9 @@
+// Original, quiet synthesized sketch. No external recordings or autoplay.
+export class DreamAudio{
+ constructor(){this.ctx=null;this.music=false;this.effects=true;this.playing=false;this.timer=null;this.beat=0;}
+ async unlock(){try{if(!this.ctx){this.ctx=new (window.AudioContext||window.webkitAudioContext)();this.master=this.ctx.createGain();this.master.gain.value=.2;this.master.connect(this.ctx.destination);}await this.ctx.resume();}catch(_){return false;}return true;}
+ tone(hz,start,duration,level,type='sine'){if(!this.ctx)return;const osc=this.ctx.createOscillator(),gain=this.ctx.createGain();osc.type=type;osc.frequency.value=hz;gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(level,start+.06);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);osc.connect(gain);gain.connect(this.master);osc.start(start);osc.stop(start+duration+.05);}
+ cue(kind='reveal'){if(!this.effects||!this.ctx||!this.playing)return;const notes=kind==='collect'?[523.25,659.25,783.99]:kind==='portal'?[392,523.25,784,1046.5]:[392,493.88];notes.forEach((n,i)=>this.tone(n,this.ctx.currentTime+i*.16,1.4,.23));}
+ configure({music,effects},playing){this.music=music;this.effects=effects;this.playing=playing;if(this.ctx)this.master.gain.setTargetAtTime(playing?.2:0,this.ctx.currentTime,.15);if(this.timer){clearInterval(this.timer);this.timer=null;}if(music&&playing&&this.ctx){this.playBar();this.timer=setInterval(()=>this.playBar(),3200);}}
+ playBar(){if(!this.ctx||!this.music||!this.playing)return;const chords=[[261.63,329.63,392],[220,261.63,329.63],[174.61,220,261.63],[196,246.94,293.66]],chord=chords[this.beat++%4],now=this.ctx.currentTime;chord.forEach(n=>this.tone(n,now,3.1,.065,'triangle'));this.tone(chord[0]/2,now,2.8,.12);[0,.8,1.6,2.4].forEach((t,i)=>this.tone(chord[i%3]*2,now+t,1,.045));}
+}
