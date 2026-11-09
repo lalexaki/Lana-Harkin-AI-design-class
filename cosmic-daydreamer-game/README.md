@@ -26,3 +26,7 @@ First draft: one compact island, one dream garden, three chapters, five unique f
 `process.html` documents the brief, event rules, state flow, changes, credits, and future questions. Development reviewed all eight professor lesson descriptions, example prompts, and sampled subtitled video frames. Course videos and the access password are not included in the published files.
 
 Concept and creative direction: Lana Harkin. AI assistance: code, procedural models, synthesized sound, editing, and checks. Supplied visual references informed atmosphere and palette and are not embedded game assets.
+
+## Celestial scenery update
+
+The sky now uses a gently drifting procedural nebula shader with blue, teal, green, and violet layers, star twinkles, and an occasional shooting star. Four background planets have generated terrain/ocean or gas-band textures, atmosphere rims, moving cloud belts, forests, miniature cottages, and rings. Their positions adapt to the viewport. Reduced motion freezes the new animation and hides shooting stars; pausing also freezes it. No reference image is embedded. Browser preview rendered without errors, and existing game-rule checks passed after the change.

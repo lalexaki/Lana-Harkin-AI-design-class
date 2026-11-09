@@ -1,4 +1,5 @@
 import * as T from './vendor/three.module.min.js';
+import {createCosmos} from './cosmos.js?v=2';
 const C={cream:0xffefd0,lavender:0xa6a0d4,pink:0xefb8d4,mint:0xa7ded7,gold:0xffe3a0,navy:0x293454};
 const mat=(color,emissive=0,intensity=0)=>new T.MeshStandardMaterial({color,roughness:.78,metalness:.02,emissive,emissiveIntensity:intensity});
 const sphere=new T.SphereGeometry(1,20,14),lowSphere=new T.IcosahedronGeometry(1,1);
@@ -15,8 +16,8 @@ function arch(parent,x,z,color=C.pink,scale=1){const g=new T.Group();g.position.
 export function createWorld(container){
  const renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;container.append(renderer.domElement);
  const scene=new T.Scene();scene.fog=new T.FogExp2(0x777eac,.006);
- const skyCanvas=document.createElement('canvas');skyCanvas.width=8;skyCanvas.height=512;const ctx=skyCanvas.getContext('2d'),gradient=ctx.createLinearGradient(0,0,0,512);gradient.addColorStop(0,'#253663');gradient.addColorStop(.5,'#7b79ac');gradient.addColorStop(1,'#d8b0cf');ctx.fillStyle=gradient;ctx.fillRect(0,0,8,512);scene.background=new T.CanvasTexture(skyCanvas);scene.background.colorSpace=T.SRGBColorSpace;
  const camera=new T.PerspectiveCamera(42,1,.1,180);camera.position.set(19,23,29);camera.lookAt(0,.5,0);
+ const cosmos=createCosmos(scene,camera);
  scene.add(new T.HemisphereLight(0xeee2ff,0x596b9b,1.6));const sunlight=new T.DirectionalLight(0xffe9d0,2);sunlight.position.set(-12,22,8);sunlight.castShadow=true;sunlight.shadow.mapSize.set(1024,1024);Object.assign(sunlight.shadow.camera,{left:-17,right:17,top:17,bottom:-17,near:1,far:60});sunlight.shadow.bias=-.001;scene.add(sunlight);const rim=new T.DirectionalLight(0x9ce5ff,1.2);rim.position.set(8,5,-14);scene.add(rim);
  const universe=new T.Group(),planet=new T.Group(),dream=new T.Group();scene.add(universe,planet,dream);dream.visible=false;
  const soil=mat(0x9691b5),grass=mat(0x888dab),awakeGrass=new T.Color(0x97c9bd);
@@ -39,11 +40,7 @@ export function createWorld(container){
  disc(planet,1.9,0xb3e2dd,0,.59,-.3,.23);
  // A few moon crystals and little mushrooms frame the paths.
  for(let i=0;i<16;i++){const a=i*2.4,r=8.5+(i%3)*.7,x=Math.sin(a)*r,z=Math.cos(a)*r;if(i%2===0){const crystal=mesh(new T.ConeGeometry(.18,.8,5),mat(0xa6d9df,0x89dce3,.2),planet,x,.96,z);crystal.rotation.z=.16;}else{mesh(new T.CylinderGeometry(.06,.08,.4,7),mat(C.cream),planet,x,.8,z);orb(planet,mat(0xd7a0c1),x,1.02,z,.29,.15,.29);}}
- // Floating neighbors establish the tiny-planet scale.
- [[-25,5,-24,5],[23,10,-32,6],[-22,14,0,2.3],[26,1,7,3.3]].forEach(([x,y,z,s],i)=>{const g=new T.Group();universe.add(g);g.position.set(x,y,z);orb(g,mat([0x8d92bb,0xaaa9ce,0xc5a7c0,0x8db5c7][i]),0,0,0,s,s*.75,s);orb(g,mat(0xb6cfc9),0,s*.46,0,s*.9,s*.25,s*.9);for(let j=0;j<3;j++)orb(g,mat(0xb0b8cf),Math.sin(j*2)*s*.4,s*.75,Math.cos(j*2)*s*.4,s*.22,s*.42,s*.22);});
  const moon=orb(universe,mat(0xffecd4,0xffdfb3,.25),-12,16,-30,4);orb(universe,mat(0x9697c4),-10.1,17.2,-27.5,3.8);const secondMoon=orb(universe,mat(C.pink,C.pink,.3),12,18,-26,2);secondMoon.visible=false;
- for(let i=0;i<8;i++){const c=cloud(universe);c.position.set((rnd()-.5)*65,5+rnd()*10,-15-rnd()*35);c.scale.setScalar(1+rnd()*2);}
- const positions=new Float32Array(450*3);for(let i=0;i<450;i++){positions[i*3]=(rnd()-.5)*90;positions[i*3+1]=5+rnd()*45;positions[i*3+2]=-45+rnd()*70;}const pointsGeo=new T.BufferGeometry();pointsGeo.setAttribute('position',new T.BufferAttribute(positions,3));const stars=new T.Points(pointsGeo,new T.PointsMaterial({color:0xfff3cf,size:.11,transparent:true,opacity:.8,sizeAttenuation:true}));universe.add(stars);
  // Nova: a little ceramic astronaut with a rose scarf and a bright visor.
  const nova=new T.Group();nova.position.set(0,.6,6);scene.add(nova);const suit=mat(0xf5eadc),visor=mat(0x435a7d),rose=mat(C.pink),boots=mat(0x797da6);
  const body=orb(nova,suit,0,.65,0,.43,.55,.32);mesh(new T.BoxGeometry(.5,.55,.22),rose,nova,0,.7,-.33);
@@ -83,7 +80,7 @@ export function createWorld(container){
   for(let i=0;i<flora.length;i++){flora[i].rotation.z=Math.sin(t*.9+i)*.035;flora[i].scale.y=.3+(i%7)/12+awaken*.45;}
   shadow.position.set(nova.position.x,.59,nova.position.z);nova.position.y=.6+(moving&&!settings.reduced?Math.abs(Math.sin(t*8))*.07:0);feet.forEach((f,i)=>f.position.z=.06+(moving?Math.sin(t*8+i*Math.PI)*.15:0));arms.forEach((f,i)=>f.rotation.x=moving?Math.sin(t*8+i*Math.PI)*.25:0);
   secondMoon.visible=ambient==='moon'&&elapsed<ambientEnd;rain.visible=(ambient==='rain'&&elapsed<ambientEnd||count===5)&&!settings.reduced;if(rain.visible){const arr=rain.geometry.attributes.position.array;for(let i=1;i<arr.length;i+=3)arr[i]=(arr[i]+dt*.8)%12;rain.geometry.attributes.position.needsUpdate=true;}
-  if(ambient==='ocean'&&elapsed<ambientEnd)grass.color.lerp(new T.Color(0x8acbd6),.6);stars.material.opacity=.7+Math.sin(t*.4)*.1;
+  if(ambient==='ocean'&&elapsed<ambientEnd)grass.color.lerp(new T.Color(0x8acbd6),.6);cosmos.update(elapsed,settings.reduced);
   renderer.render(scene,camera);
  }
  function move(dx,dz,dt){const length=Math.hypot(dx,dz);moving=length>.01;if(!moving)return;const speed=3.8;const forward=new T.Vector3(-camera.position.x,0,-camera.position.z).normalize();const right=new T.Vector3(-forward.z,0,forward.x);const velocity=right.multiplyScalar(dx/Math.max(1,length)).add(forward.multiplyScalar(dz/Math.max(1,length))).multiplyScalar(speed*dt);nova.position.add(velocity);const limit=lastRealm==='dream'?5.8:10.9;if(Math.hypot(nova.position.x,nova.position.z)>limit){const len=Math.hypot(nova.position.x,nova.position.z);nova.position.x*=limit/len;nova.position.z*=limit/len;}nova.rotation.y=Math.atan2(velocity.x,velocity.z);}

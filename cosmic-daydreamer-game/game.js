@@ -1,5 +1,5 @@
 import {initialState,reduceGame,dreams,isExploring,canDiscover} from './state.mjs';
-import {createWorld} from './world.js';
+import {createWorld} from './world.js?v=sky3';
 import {DreamAudio} from './audio.js';
 const $=id=>document.getElementById(id), audio=new DreamAudio();
 let state=initialState(),world,walkTarget=null,walkAction=null,keys=new Set(),previousTime=0,simulationTime=0,nextSurprise=12,messageUntil=0,hintedId=null,nearby=null,lastFocus=null;
