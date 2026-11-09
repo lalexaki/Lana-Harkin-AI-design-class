@@ -30,3 +30,7 @@ Concept and creative direction: Lana Harkin. AI assistance: code, procedural mod
 ## Celestial scenery update
 
 The sky now uses a gently drifting procedural nebula shader with blue, teal, green, and violet layers, star twinkles, and an occasional shooting star. Four background planets have generated terrain/ocean or gas-band textures, atmosphere rims, moving cloud belts, forests, miniature cottages, and rings. Their positions adapt to the viewport. Reduced motion freezes the new animation and hides shooting stars; pausing also freezes it. No reference image is embedded. Browser preview rendered without errors, and existing game-rule checks passed after the change.
+
+## Background art refinement
+
+The storybook treatment is limited to the surrounding sky and distant planets, following Lana’s marked browser areas. The playable island, lighting, camera, movement, UI, and collection rules retain their published behavior and appearance. Background worlds have softly irregular globe geometry, moss-and-rock color variation, brushstroke textures, layered instanced foliage, cottage details and window halos. The sky adds warmer emerald light, softer gas-cloud bands, and depth-layered twinkling glints with restrained drift. These effects use the existing paused/reduced-motion clock. A separate island redesign was set aside locally and is not part of this publication.

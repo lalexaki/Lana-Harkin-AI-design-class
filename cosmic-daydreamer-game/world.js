@@ -1,5 +1,5 @@
 import * as T from './vendor/three.module.min.js';
-import {createCosmos} from './cosmos.js?v=2';
+import {createCosmos} from './cosmos.js?v=storybook2';
 const C={cream:0xffefd0,lavender:0xa6a0d4,pink:0xefb8d4,mint:0xa7ded7,gold:0xffe3a0,navy:0x293454};
 const mat=(color,emissive=0,intensity=0)=>new T.MeshStandardMaterial({color,roughness:.78,metalness:.02,emissive,emissiveIntensity:intensity});
 const sphere=new T.SphereGeometry(1,20,14),lowSphere=new T.IcosahedronGeometry(1,1);
